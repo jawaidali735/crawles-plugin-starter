@@ -1,31 +1,70 @@
 {
   "name": "Team Rhythm Kit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "tagline": "A daily standup digest and a weekly wrap-up for your team channel",
   "description": "Two ready-made automations that post to your team's Slack channel on a schedule, and two AI skills that keep standup summaries and first customer replies short and consistent.",
-  "release_notes": "First release: daily digest, weekly wrap-up, and two skills.",
+  "release_notes": "Version 1.1.0: adds a meeting-notes skill.",
   "connectors": [],
-  "builtins": ["slack"],
+  "builtins": [
+    "slack"
+  ],
   "templates": [
     {
       "title": "Daily standup reminder",
       "sentence": "Every weekday morning, ask the team channel for standup updates",
-      "trigger": { "source": "schedule", "event": "cron", "filters": { "cron": "0 9 * * 1-5" } },
+      "trigger": {
+        "source": "schedule",
+        "event": "cron",
+        "filters": {
+          "cron": "0 9 * * 1-5"
+        }
+      },
       "steps": [
-        { "worker": "slack", "action": "message_post", "params": { "text": "Good morning. What did you finish, what are you on, and is anything blocked?" } }
+        {
+          "worker": "slack",
+          "action": "message_post",
+          "params": {
+            "text": "Good morning. What did you finish, what are you on, and is anything blocked?"
+          }
+        }
       ]
     },
     {
       "title": "Friday wrap-up",
       "sentence": "Every Friday afternoon, ask the team channel for the week's wins",
-      "trigger": { "source": "schedule", "event": "cron", "filters": { "cron": "0 16 * * 5" } },
+      "trigger": {
+        "source": "schedule",
+        "event": "cron",
+        "filters": {
+          "cron": "0 16 * * 5"
+        }
+      },
       "steps": [
-        { "worker": "slack", "action": "message_post", "params": { "text": "Week wrap-up: share one thing that went well and one thing to improve." } }
+        {
+          "worker": "slack",
+          "action": "message_post",
+          "params": {
+            "text": "Week wrap-up: share one thing that went well and one thing to improve."
+          }
+        }
       ]
     }
   ],
   "skills": [
-    { "name": "Customer reply", "description": "How to write a first reply to a customer who reports a problem", "file": "skills/customer-reply/SKILL.md" },
-    { "name": "Daily standup", "description": "How to write a short daily standup summary from a list of updates", "file": "skills/daily-standup/SKILL.md" }
+    {
+      "name": "Customer reply",
+      "description": "How to write a first reply to a customer who reports a problem",
+      "file": "skills/customer-reply/SKILL.md"
+    },
+    {
+      "name": "Daily standup",
+      "description": "How to write a short daily standup summary from a list of updates",
+      "file": "skills/daily-standup/SKILL.md"
+    },
+    {
+      "name": "Meeting notes",
+      "description": "How to turn raw meeting notes into decisions and next steps",
+      "file": "skills/meeting-notes/SKILL.md"
+    }
   ]
 }
